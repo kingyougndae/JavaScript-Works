@@ -37,3 +37,71 @@ const age = someCode(birthday);
 
 const BIRTHDAY = "17.09.1992"; // 하드 코딩한 값, 실행 전 이미 값을 알고, 코드에 직접 그 값을 쓴다 (변하지 않는다.)
 const age = someCode(BIRTHDAY); // age는 런타임, 올해와 내년의 나이는 다르다. age는 대문자 상수에 적합하지 않다.
+
+// 과제 1 (array)
+// 배열은 복사가 될까?
+let fruits = ["사과", "배", "오렌지"];
+
+// 배열을 복사 한 후, push 메서드를 이용해 새로운 값을 추가.
+let shoppingCart = fruits;
+shoppingCart.push("바나나"); // (4)
+// fruits에 어떤 값이 들어 있을까?
+alert(fruits.length); // (4)
+// ⭐️ 배열은 객체 !! , shoppingCart 와 fruits는 모두 같은 "배열" 참조함 (JS에서 배열은 배열이 아니다?) ⭐️
+
+/*
+🙋🏻‍♂️ 배열과 관련된 연산 🙋🏻‍♂️🙋🏻
+1. 요소 "Jazz","Blues"가 잇는 styles 배열 생성
+2. "Rock-n-Roll"을 배열 끝에 추가
+3. 배열 정 중앙에 있는 요소를 "Classics"로 바꿈 , 가운데 요소를 찾는 코드는 요소가 홀수 개인 배열에서도 잘 작동해야 됩니다.
+4. 배열의 첫 번째 요소를 꺼내서 출력
+5. "Rap" 과 "Reggae"를 배열의 앞으로 추가
+*/
+
+let styles = ["Jazz", "Blues"];
+styles.push("Rock-n-Roll");
+styles[Math.floor((styles.length - 1) / 2)] = "Classics";
+aalert(styles.shift());
+styles.unshift("Rap", "Reggae");
+
+// 배열 컨텍스트에서 함수 호출하기 : 아래코드 실행하면 어떤결과? 이유는?
+let arr = ["a", "b"];
+
+arr.push(function () {
+  alert(this);
+});
+
+arr[2](); //  arr[2]() 를 호출하는 것은 "obj"가 "arr"이고, "method" 는 "2"인 메서드 // 즉, arr[2]에 있는 함수가 객체 메서드처럼 호출, 따라서 arr[2]는 arr를 참조하는 "this"를 받고, 배열을 출력
+// 배열은 초기 2개의 값에, 함수가 추가되어 총 3개의 값을 가진다.
+
+// 🙋🏻‍♂️ 입력한 숫자의 합 구하기 🙋🏻‍♂️
+// 아래 조건을 만족하는 함수 "sumInput()" 을 작성
+/* 
+"prompt" 창을 띄워 사용자에게 숫자를 입력해 달라고 요청한 뒤, 입력받은 값들을 배열에 저장
+숫자가 아닌 값, 혹은 빈 문자열을 입력하거나 'cancel'버튼을 누르면 질문을 멈춤
+배열 요소의 합을 계산하고 리턴합니다.
+
+주의: 숫자 '0'은 유효한 숫자이므로, 사용자가 '0'을 입력하더라도 질문이 멈추지 말아야 합니다.
+*/
+
+function sumInput() {
+  let numbers = [];
+
+  while (true) {
+    let value = prompt("숫자를 입력해 주세요.", 0);
+
+    //입력받는 것을 정지해야 하는 경우
+    if (value === "" || value === null || !isFinite(value)) break;
+
+    numbers.push(+value);
+  }
+  let sum = 0;
+  for (let number of numbers) {
+    sum += number;
+  }
+  return sum;
+}
+
+alert(sumInput());
+
+//해설 : "+value"로 입력받은 값을 숫자형으로 변경한 이후엔, 빈 문자열(정지 신호)을 "0(유효한 숫자)"과 구분할 수 없기 때문에, "prompt" 직후에 "value"를 숫자로 변환하지 않고 나중에 숫자로 변환.
