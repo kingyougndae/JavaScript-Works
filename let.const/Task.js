@@ -192,3 +192,86 @@ let users = [john, pete, mary];
 let names = users.map(item => item.name);
 
 alert(name); // John, Pete, Mary
+
+
+// 과제 3 (object)
+// 다음 각 동작을 한 줄씩, 코드로 작성
+let user ={};         // 빈 객체 'user'
+user.name = "John";   // user에 키가 name, 값이 John 프로퍼티 추가
+user.surname="Smith"; // user에 키가 surname, 값이 Smith인 프로퍼티를 추가.
+user.name = "Pete";   // name의 값을 pete로 수정
+delete user.name;     // user에서 프로퍼티 name 삭제
+
+// 객체가 비어있는지 확인
+// 객체에 프로퍼티가 하나도 없는 경우 'true' 그렇지 않을 경우 'false'를 반환해주는 함수 "isEmpty(obj"를 만들자
+function isEmpty(obj) {
+  for(let key in obj) {
+    // if the loop has started, there is a property
+    return false;
+  }
+  return true;
+}
+
+// 변하지 않는 객체? : 'const'와 함께 선언한 객체를 변경하는게 가능할까?
+const user = {
+  name: "John"
+};
+// 아래 코드는 에러 없이 실행될까?
+user.name = "Pete";
+
+// =>
+const user = {
+  name: "John"
+};
+// works
+user.name = "Pete";
+// error
+user =123;
+
+// 프로퍼티 합계 구하기
+// 모든 팀원의 월급에 대한 정보를 담고 있는 객체가 있다고 해보자.
+let salaries = {
+  John: 100,
+  Ann: 160,
+  Pete: 130,
+}
+
+// 모든 팀원의 월급을 합한 값, 그 값을 변수 'sum'에 저장해주는 코드를 작성, 'sum엔 390이 저장?
+let salaries = {
+  John: 100,
+  Ann: 160,
+  Pete: 130,
+};
+let sum = 0;
+for(let key in salaries) {
+  sum += salaries[key];
+}
+alert(sum); // 390
+
+// 프로퍼티 값 두 배로 부풀리기
+// 객체 'obj'의 프로퍼티 값이 숫자인 경우 그 값을 '두 배'해주는 함수 'multiplyNumeric(obj)'를 만들자.
+
+// 함수 호출 전
+let menu = {
+  width: 200,
+  height: 300,
+  title: "My menu"
+};
+
+multiplyNumeric(menu);
+
+// 함수 호출 후
+menu = {
+  width: 400,
+  height: 600,
+  title: "My menu"
+};
+
+// =>
+function multiplyNumeric(obj) {
+  for (let key in obj) {
+    if(typeof obj[key] == 'number') {
+      obj[key] *= 2;
+    }
+  }
+}
