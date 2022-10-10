@@ -105,3 +105,90 @@ function sumInput() {
 alert(sumInput());
 
 //해설 : "+value"로 입력받은 값을 숫자형으로 변경한 이후엔, 빈 문자열(정지 신호)을 "0(유효한 숫자)"과 구분할 수 없기 때문에, "prompt" 직후에 "value"를 숫자로 변환하지 않고 나중에 숫자로 변환.
+
+// 과제 2 (arry-methods)
+border-left-width를 borderLeftWidth로 변경하기
+function camelize(str) {
+  return str
+    .split('-')
+    .map(
+      (word, index) => index == 0 ? word : word[0].toUpperCase() + word.slice(1)
+    )
+    .join('');
+}
+
+// 특정 범위에 속하는 요소 찾기
+// 배열 arr의 요소 중 "a"이상 "b"이하 범위에 속하는 요소만 골라 새로운 배열에 집어넣고, 해당 요소를 출력해주는 함수 filterRange(arr,a,b)를 작성
+let arr = [5,3,8,1];
+let filtered = filterRange(arr,1,4);
+
+alert(filtered); // 3,1 (조건에 맞는 요소)
+alert(arr); // 5,3,8,1(기존 배열은 변경되지 않습니다
+// =>
+function filterRange(arr,a,b) {
+  return arr.filter(item => (a <= item && item <= b));
+}
+let arr = [ 5,3,8,1];
+let filtered = filterRange(arr,1,4);
+
+alert(filtered); // 3,1 (조건에 맞는 요소)
+alert(arr); // 5,3,8,1(기존 배열은 변경되지 않습니다
+
+// 특정 범위에 속하는 요소 찾기(배열 변경)
+let arr = [5,3,8,1];
+filterRangeInPlace(arr,1,4); // 1과 4 사이에 있지 않은 요소는 모두 제거함
+alert(arr); // [3,1]
+// =>
+function filterRangeInPlace(arr,a,b) {
+  for(let i =0; i< arr.length; i++) {
+    let val = arr[i];
+    
+    // 범위 밖의 요소를 제거함
+    if( val < a || val > b) {
+      arr.splice(i,1);
+      i--;
+    }
+  }
+}
+let arr = [5,3,8,1];
+filterRangeInPlace(arr,1,4); // 1과 4 사이에 있지 않은 요소는 모두 제거함
+alert(arr); // [3,1]
+
+// 내림차순으로 정렬하기
+
+let arr = [5,2,1,-10,8];
+
+// 요소를 내림차순으로 정렬해주는 코드를 여기 작성
+arr.sort((a,b) => b-a);
+alert(arr);
+
+// 배열 복사본을 정렬
+let arr = ["HTML", "JavaScript", "CSS"];
+
+let sorted = copySorted(arr);
+
+alert(sorted); // CSS, HTML, JavaScirpt
+alert(arr); // HTML, JavaScript, CSS (no changes)
+
+// =>
+function copySorted(arr) {
+  return arr.slice().sort();
+}
+
+let arr = ["HTML", "JavaScript", "CSS"];
+
+let sorted = copySorted(arr);
+
+alert(sorted);
+alert(arr);
+
+// 이름 매핑하기 
+// 'name'을 나타내는 프로퍼티를 가진 객체 "user"가 담긴 배열이 있습니다. 'name'의 값만 담은 새로운 배열을 만들어주는 코드를 작성
+let john = {name: "John", age: 25};
+let pete = {name: "Pete", age: 30};
+let mary = {name: "Mary", age: 28};
+
+let users = [john, pete, mary];
+let names = users.map(item => item.name);
+
+alert(name); // John, Pete, Mary
